@@ -2,6 +2,7 @@ package application;
 
 import logic.Dice;
 import logic.GameSystem;
+import player.Player;
 
 import java.util.Scanner;
 
@@ -9,6 +10,8 @@ public class Main {
     private static Scanner sc;
     private static GameSystem gs = GameSystem.getInstance();
     private static Dice dice = Dice.getInstance();
+    private static Player player = new Player(0);
+
 
     public static void main(String[] args) {
         dice.randomNumber();
@@ -39,13 +42,13 @@ public class Main {
 
     }
     public static void startGameFlow() {
-        while (!gs.isGameEnd()) {
+        while (!gs.isGameEnd(player.getCurrentNumberOnBoard())) {
             dice.randomNumber();
             int addToCurrent = dice.getNumberDice();
             System.out.println(dice.getNumberDice());
             System.out.println("go to" + addToCurrent);
-            gs.setCurrentNumberOnBoard(addToCurrent);
-            System.out.println("now" + gs.getCurrentNumberOnBoard());
+            player.setCurrentNumberOnBoard(addToCurrent);
+            System.out.println("now" + player.getCurrentNumberOnBoard());
             int choice = inputCheck(0, 1);
         }
     }

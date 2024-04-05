@@ -1,15 +1,23 @@
 package player;
 
+import logic.GameSystem;
+
 public class Player {
-    private String name;
 
-    public Player(){
+    private int currentNumberOnBoard;
+
+
+    public Player(int currentNumberOnBoard1){
+        setCurrentNumberOnBoard(currentNumberOnBoard1);
 
     }
-    public void setName(String name) {
-        this.name = name;
-        if (name.isBlank()) {
-            this.name = "Player";
-        }
+
+    public void setCurrentNumberOnBoard(int addRollNum){
+        int currentNumberOnBoardStore = getCurrentNumberOnBoard();
+        this.currentNumberOnBoard = currentNumberOnBoardStore + addRollNum;
     }
+    public int getCurrentNumberOnBoard(){
+        return currentNumberOnBoard;
+    }
+
 }
