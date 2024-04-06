@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Main {
     private static Scanner sc;
-    private static GameSystem gs = GameSystem.getInstance();
+    private static final GameSystem gs = GameSystem.getInstance();
     private static Dice dice = Dice.getInstance();
     private static Player player = new Player(0);
 
@@ -36,6 +36,7 @@ public class Main {
             if (choice == 0){
                 gs.setNumberOfPlayer(1);
                 startGameFlow();
+                if (gs.isGameEnd(player.getCurrentNumberOnBoard())) break;
             }
         }
 
@@ -46,11 +47,18 @@ public class Main {
             dice.randomNumber();
             int addToCurrent = dice.getNumberDice();
             System.out.println(dice.getNumberDice());
-            System.out.println("go to" + addToCurrent);
+            System.out.println("add to" + addToCurrent);
             player.setCurrentNumberOnBoard(addToCurrent);
-            System.out.println("now" + player.getCurrentNumberOnBoard());
+            System.out.println("go to " + player.getCurrentNumberOnBoard());
             int choice = inputCheck(0, 1);
+            if(player.getCurrentNumberOnBoard() >= 81){
+                System.out.println("Win");
+                gs.setGameEnd(true);
+                break;
+            }
         }
+
+
     }
 
     public static int randomFromDice() {
